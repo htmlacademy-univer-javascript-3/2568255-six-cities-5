@@ -5,3 +5,9 @@ export enum AppRoute {
   Offer = '/offer/:id',
   NotFound = '*',
 }
+
+export enum CardType {
+  Main,
+  Favorite,
+  Nearby,
+}
