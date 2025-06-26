@@ -9,10 +9,11 @@ import { NotFoundPage } from '../../pages/not-found-page/not-found-page.tsx';
 import { PrivateRoute } from '../private-route.tsx';
 import { Layout } from '../layout.tsx';
 import { store } from '../../store';
-import { fetchOffersAction } from '../../store/api-actions.ts';
+import {checkAuthorizationAction, fetchOffersAction} from '../../store/api-actions.ts';
 
 export function App(): ReactElement {
   store.dispatch(fetchOffersAction());
+  store.dispatch(checkAuthorizationAction());
 
   return (
     <BrowserRouter>
@@ -23,7 +24,7 @@ export function App(): ReactElement {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute isAuthorized>
+              <PrivateRoute>
                 <FavoritesPage />
               </PrivateRoute>
             }

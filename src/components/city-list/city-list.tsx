@@ -1,4 +1,4 @@
-﻿import { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch.ts';
 import { setActiveCityAction } from '../../store/actions.ts';

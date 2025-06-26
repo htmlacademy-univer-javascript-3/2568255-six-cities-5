@@ -26,9 +26,16 @@ export enum MapType {
   Offer,
 }
 
-
 export enum ApiRoutes {
   GetOffers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export enum AuthorizationStatus {
+  Authorized = 'Authorized',
+  Unauthorized = 'Unauthorized',
+  Unknown = 'Unknown',
 }
 
 export const CITIES: Cities = [
@@ -46,7 +53,7 @@ export const CITIES: Cities = [
       latitude: 50.938361,
       longitude: 6.959974,
       zoom: 13,
-    }
+    },
   },
   {
     name: 'Brussels',
@@ -84,9 +91,10 @@ export const CITIES: Cities = [
 
 export const DEFAULT_CITY = CITIES.find((c) => c.name === 'Paris') || CITIES[0];
 
-
 export const BASE_URL = 'https://14.design.htmlacademy.pro/six-cities';
 export const TIMEOUT = 5000;
+export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+export const AUTH_TOKEN_HEADER = 'X-Token';
 
 export const URL_MARKER_DEFAULT = '/img/pin.svg';
 export const URL_MARKER_ACTIVE = '/img/pin-active.svg';
