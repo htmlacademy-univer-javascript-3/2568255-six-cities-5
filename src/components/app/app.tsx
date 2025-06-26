@@ -1,10 +1,9 @@
-import { ReactElement } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { AppRoute } from '../../const.ts';
-import { store } from '../../store';
+import { useAppDispatch } from '../../hooks/use-app-dispatch.ts';
 import {
   checkAuthorizationAction,
+  fetchFavoriteOffersAction,
   fetchOffersAction,
 } from '../../store/api-actions.ts';
 
@@ -14,11 +13,15 @@ import MainPage from '../../pages/main-page/main-page.tsx';
 import LoginPage from '../../pages/login-page/login-page.tsx';
 import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
 import OfferPage from '../../pages/offer-page/offer-page.tsx';
-import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
+import { NotFoundPage } from '../../pages/not-found-page/not-found-page.tsx';
+import { ReactElement } from 'react';
 
 function App(): ReactElement {
-  store.dispatch(fetchOffersAction());
-  store.dispatch(checkAuthorizationAction());
+  const dispatch = useAppDispatch();
+  dispatch(fetchOffersAction());
+  dispatch(fetchFavoriteOffersAction());
+  dispatch(checkAuthorizationAction());
+
   return (
     <BrowserRouter>
       <Routes>
@@ -40,3 +43,4 @@ function App(): ReactElement {
     </BrowserRouter>
   );
 }
+export default App;

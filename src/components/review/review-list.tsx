@@ -1,18 +1,19 @@
 import { ReactElement } from 'react';
-
-import { Reviews } from '../../models/review.ts';
-
+import { Review } from '../../models/review.ts';
 import ReviewItem from './review-item.tsx';
 
-type ReviewsListProps = {};
+type ReviewsListProps = {
+  reviews: Review[];
+};
 
 function ReviewsList({ reviews }: ReviewsListProps): ReactElement {
   return (
     <ul className="reviews__list">
-      {reviews.map((review) => (
+      {reviews.map((review: Review) => (
         <ReviewItem key={review.id} {...review} />
       ))}
     </ul>
   );
 }
+
 export default ReviewsList;

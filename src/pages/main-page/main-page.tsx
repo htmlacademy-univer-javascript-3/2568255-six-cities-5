@@ -15,7 +15,7 @@ import Header from '../../components/header/header.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
 import Sorting from '../../components/sorting/sorting.tsx';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
-import OfferCardsList from '../../components/offer/offer-cards-list.tsx';
+import OfferCardsList from '../../components/offer/offer-card-list.tsx';
 import Map from '../../components/map/map.tsx';
 
 const getSorter = (sortingType: SortingType) => {
