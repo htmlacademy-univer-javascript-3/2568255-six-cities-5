@@ -2,11 +2,12 @@ import { OfferCardList } from '../../components/offer-card-list/offer-card-list.
 import { Offer } from '../../models/offer.ts';
 import Map from '../../components/map/map.tsx';
 import { useState } from 'react';
-type MainScreenProps = {
+import { CardType } from '../../const.ts';
+type MainPageProps = {
   offers: Offer[];
 };
 
-export function MainScreen({ offers }: MainScreenProps) {
+export function MainPage({ offers }: MainPageProps) {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   return (
@@ -84,6 +85,7 @@ export function MainScreen({ offers }: MainScreenProps) {
             <OfferCardList
               offers={offers}
               setActiveOfferId={setActiveOfferId}
+              cardType={CardType.Main}
             />
           </section>
 
