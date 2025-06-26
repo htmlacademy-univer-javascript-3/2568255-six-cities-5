@@ -67,7 +67,9 @@ function ReviewForm({ submitHandler }: ReviewFormProps): ReactElement {
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-      ></textarea>
+      >
+        
+      </textarea>
 
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
