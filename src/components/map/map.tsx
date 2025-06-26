@@ -1,23 +1,27 @@
-import { ReactElement, useEffect, useRef } from 'react';
-import useMap from '../../hooks/use-map.ts';
+import {ReactElement, useEffect, useRef} from 'react';
 import leaflet from 'leaflet';
-import { MapType, URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../const.ts';
-import { Offer } from '../../models/offer.ts';
-import { Location } from '../../models/location.ts';
+
+import {MapType, URL_MARKER_ACTIVE, URL_MARKER_DEFAULT} from '../../const.ts';
+import {Location} from '../../models/location.ts';
+import {useMap} from '../../hooks/use-map.ts';
+
+
+type OfferOnMap = {
+  id: string;
+  location: Location;
+};
+
+type OffersOnMap = OfferOnMap[];
 
 type MapProps = {
   location: Location;
-  offers: Offer[];
+  offers: OffersOnMap;
   activeOfferId: string | null;
   type: MapType;
 };
 
-export default function Map({
-  location,
-  offers,
-  activeOfferId,
-  type,
-}: MapProps): ReactElement {
+
+function Map({location, offers, activeOfferId, type}: MapProps): ReactElement {
   const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap(mapRef, location);
 
@@ -37,28 +41,27 @@ export default function Map({
     if (map) {
       offers.forEach((offer) => {
         leaflet
-          .marker(
-            {
-              lat: offer.location.latitude,
-              lng: offer.location.longitude,
-            },
-            {
-              icon:
-                activeOfferId && offer.id === activeOfferId
-                  ? activeCustomIcon
-                  : defaultCustomIcon,
-            }
-          )
+          .marker({
+            lat: offer.location.latitude,
+            lng: offer.location.longitude,
+          }, {
+            icon: (activeOfferId && offer.id === activeOfferId)
+              ? activeCustomIcon
+              : defaultCustomIcon,
+          })
           .addTo(map);
       });
     }
-  }, [map, offers, activeOfferId, activeCustomIcon, defaultCustomIcon]);
+  }, [map, offers, activeOfferId]);
 
   return (
     <div
-      className={type === MapType.Main ? 'cities__map map' : 'offer__map map'}
-      style={{ height: '100%', width: '100%' }}
+      className={type === MapType.Main ? 'cities__map map' : 'offer__map map' }
+      style={{height: '100%', width: '100%'}}
       ref={mapRef}
-    ></div>
+    >
+    </div>
   );
 }
+
+export default Map;

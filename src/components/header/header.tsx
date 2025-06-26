@@ -1,18 +1,20 @@
-import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const.ts';
-import { useAppSelector } from '../../hooks/use-app-selector.ts';
-import { useAppDispatch } from '../../hooks/use-app-dispatch.ts';
-import { logoutAction } from '../../store/api-actions.ts';
+import {Link} from 'react-router-dom';
 
-export default function Header() {
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-  const userData = useAppSelector((state) => state.userData);
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {getAuthStatus, getUserEmail, getUserInfo} from '../../store/user/selectors.ts';
+import {logoutAction} from '../../store/api-actions.ts';
+
+
+function Header() {
+  const authStatus = useAppSelector(getAuthStatus);
+  const userInfo = useAppSelector(getUserInfo);
+  const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
 
-  const isAuthorized = () =>
-    authorizationStatus === AuthorizationStatus.Authorized;
+  const isAuthorized = () => authStatus === AuthorizationStatus.Authorized;
+
   const handleLogout = () => {
     dispatch(logoutAction());
   };
@@ -23,13 +25,7 @@ export default function Header() {
         <div className="header__wrapper">
           <div className="header__left">
             <Link className="header__logo-link" to={AppRoute.Main}>
-              <img
-                className="header__logo"
-                src="/img/logo.svg"
-                alt="6 cities logo"
-                width="81"
-                height="41"
-              />
+              <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
             </Link>
           </div>
           <nav className="header__nav">
@@ -37,45 +33,29 @@ export default function Header() {
               {isAuthorized() ? (
                 <>
                   <li className="header__nav-item user">
-                    <Link
-                      className="header__nav-link header__nav-link--profile"
-                      to={AppRoute.Favorites}
-                    >
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
-                        <img src={userData?.avatarUrl} alt="user_avatar"></img>
+                        <img src={userInfo?.avatarUrl} alt="user_avatar"></img>
                       </div>
-                      <span className="header__user-name user__name">
-                        {userData?.name}
-                      </span>
+                      <span className="header__user-name user__name">{userEmail}</span>
                       <span className="header__favorite-count">3</span>
-                    </Link>
+                      </Link>Add commentMore actions
                   </li>
                   <li className="header__nav-item">
-                    <Link
-                      className="header__nav-link"
-                      to={AppRoute.Main}
-                      onClick={handleLogout}
-                    >
+                    <Link className="header__nav-link" to={AppRoute.Main} onClick={handleLogout}>
                       <span className="header__signout">Sign out</span>
                     </Link>
                   </li>
                 </>
               ) : (
                 <li className="header__nav-item user">
-                  <Link
-                    className="header__nav-link header__nav-link--profile"
-                    to={AppRoute.Login}
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
+                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    </div>
                     <span className="header__login">Sign in</span>
                   </Link>
                 </li>
               )}
-              <li className="header__nav-item">
-                <Link className="header__nav-link" to={AppRoute.Main}>
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
             </ul>
           </nav>
         </div>
@@ -83,3 +63,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;
