@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Юлия Кулигина](https://up.htmlacademy.ru/univer-js3/5/user/2568255).
-* Наставник: `Неизвестно`.
+* Студент: [Юлия Кулигина](https://htmlacademy.ru/profile/id2568255).
+* Наставник: [Хрушков Артем](https://htmlacademy.ru/profile/id98923).
 
 ---
 
