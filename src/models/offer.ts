@@ -23,5 +23,3 @@ export type Offer = {
   rating: number;
   previewImage: string;
 };
-
-

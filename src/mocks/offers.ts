@@ -8,7 +8,7 @@ export const OFFER_LIST_MOCK: Offer[] = [
     type: 'house',
     price: 0,
     city: {
-      name: 'City0',
+      name: 'Amsterdam',
       location: {
         latitude: 0,
         longitude: 0,
@@ -16,8 +16,8 @@ export const OFFER_LIST_MOCK: Offer[] = [
       },
     },
     location: {
-      latitude: 0,
-      longitude: 0,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     isFavorite: false,
@@ -31,7 +31,7 @@ export const OFFER_LIST_MOCK: Offer[] = [
     type: 'house',
     price: 100,
     city: {
-      name: 'City1',
+      name: 'Amsterdam',
       location: {
         latitude: 0,
         longitude: 0,
@@ -39,8 +39,8 @@ export const OFFER_LIST_MOCK: Offer[] = [
       },
     },
     location: {
-      latitude: 0,
-      longitude: 0,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     isFavorite: true,
@@ -54,7 +54,7 @@ export const OFFER_LIST_MOCK: Offer[] = [
     type: 'house',
     price: 200,
     city: {
-      name: 'Cool City',
+      name: 'Amsterdam',
       location: {
         latitude: 0,
         longitude: 0,
@@ -62,8 +62,8 @@ export const OFFER_LIST_MOCK: Offer[] = [
       },
     },
     location: {
-      latitude: 0,
-      longitude: 0,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8,
     },
     isFavorite: true,
@@ -77,7 +77,7 @@ export const OFFER_LIST_MOCK: Offer[] = [
     type: 'apartment',
     price: 777,
     city: {
-      name: 'Cool City',
+      name: 'Amsterdam',
       location: {
         latitude: 0,
         longitude: 0,
@@ -85,8 +85,8 @@ export const OFFER_LIST_MOCK: Offer[] = [
       },
     },
     location: {
-      latitude: 0,
-      longitude: 0,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8,
     },
     isFavorite: true,
