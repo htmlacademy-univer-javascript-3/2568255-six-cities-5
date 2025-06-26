@@ -11,6 +11,7 @@ const RATING_STARS = [5, 4, 3, 2, 1];
 type ReviewFormProps = {
   submitHandler: (review: { comment: string; rating: number }) => void;
 };
+
 function ReviewForm({ submitHandler }: ReviewFormProps): ReactElement {
   const [reviewData, setReviewData] = useState({
     comment: '',
@@ -66,7 +67,9 @@ function ReviewForm({ submitHandler }: ReviewFormProps): ReactElement {
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-      ></textarea>
+      >
+        
+      </textarea>
 
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

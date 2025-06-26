@@ -1,10 +1,13 @@
-import { FavoriteList } from '../../components/favorite-list/favorite-list.tsx';
+import { ReactElement } from 'react';
+import cn from 'classnames';
+
 import { Offer, Offers } from '../../models/offer.ts';
 import { useAppSelector } from '../../hooks/use-app-selector.ts';
+import { getOffers } from '../../store/offers-list/selectors.ts';
+
 import Header from '../../components/header/header.tsx';
 import Footer from '../../components/footer/footer.tsx';
-import cn from 'classnames';
-import { ReactElement } from 'react';
+import FavoriteList from '../../components/favorite-list/favorite-list.tsx';
 
 function FavoritesEmpty(): ReactElement {
   return (
@@ -19,8 +22,9 @@ function FavoritesEmpty(): ReactElement {
     </>
   );
 }
-export function FavoritesPage() {
-  const offers = useAppSelector((state) => state.offers);
+
+function FavoritesPage() {
+  const offers = useAppSelector(getOffers);
   const favorites: Offers = offers.filter((offer) => offer.isFavorite);
   const favoritesDictionary: { [key: string]: Offer[] } = {};
   for (const offer of favorites) {
@@ -29,8 +33,9 @@ export function FavoritesPage() {
     }
     favoritesDictionary[offer.city.name].push(offer);
   }
-  const isEmpty = () => favorites.length === 0;
   const favoritesByCity = Object.entries(favoritesDictionary);
+  const isEmpty = () => favorites.length === 0;
+
   return (
     <div className={cn('page', { 'page--favorites-empty': isEmpty })}>
       <Header />
@@ -60,3 +65,5 @@ export function FavoritesPage() {
     </div>
   );
 }
+
+export default FavoritesPage;

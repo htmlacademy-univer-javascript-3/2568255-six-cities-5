@@ -1,9 +1,10 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { Location } from '../models/location.ts';
 import leaflet, { Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-export default function useMap(
+import { Location } from '../models/location.ts';
+
+export function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
   location: Location
 ) {

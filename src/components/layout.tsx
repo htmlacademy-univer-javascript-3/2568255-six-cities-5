@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
-import {Outlet} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
-export function Layout(): ReactElement {
-  return (
-    <Outlet/>
-  );
+function Layout(): ReactElement {
+  return <Outlet />;
 }
+
+export default Layout;
