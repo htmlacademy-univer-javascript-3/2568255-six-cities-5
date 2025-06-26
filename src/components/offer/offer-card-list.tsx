@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { capitalize } from '../../helper-functions.ts';
 import { AppRoute, CardType } from '../../const.ts';
 import cn from 'classnames';
+import { useAppDispatch } from '../../hooks/use-app-dispatch.ts';
+import { fetchOfferAction } from '../../store/api-actions.ts';
+
 type OfferCardProps = Omit<Offer, 'city' | 'location'> & {
   onChangeActiveOfferId?: (id: string | null) => void;
   cardType: CardType;
@@ -20,18 +23,26 @@ export function OfferCard({
   onChangeActiveOfferId,
   cardType,
 }: OfferCardProps) {
+  const dispatch = useAppDispatch();
   const offerUrl: string = AppRoute.Offer.replace(':id', id);
+
+  const handleFetchOffer = (offerId: string) => {
+    dispatch(fetchOfferAction(offerId));
+  };
+
   return (
     <article
       className={cn('place-card', {
-        'cities__card': cardType === CardType.Main,
-        'favorites__card': cardType === CardType.Favorite,
+        cities__card: cardType === CardType.Main,
+        favorites__card: cardType === CardType.Favorite,
         'near-places__card': cardType === CardType.Main,
       })}
       onMouseEnter={() =>
-        onChangeActiveOfferId ? onChangeActiveOfferId(id) : null}
+        onChangeActiveOfferId ? onChangeActiveOfferId(id) : null
+      }
       onMouseLeave={() =>
-        onChangeActiveOfferId ? onChangeActiveOfferId(null) : null}
+        onChangeActiveOfferId ? onChangeActiveOfferId(null) : null
+      }
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -45,7 +56,7 @@ export function OfferCard({
           'near-places__image-wrapper': cardType === CardType.Nearby,
         })}
       >
-        <Link to={offerUrl}>
+        <Link to={offerUrl} onClick={() => handleFetchOffer(id)}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -89,14 +100,14 @@ export function OfferCard({
           <div className="place-card__stars rating__stars">
             <span
               style={{ width: `${(Math.round(rating) / 5) * 100}%` }}
-            >
-
-            </span>
+            ></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={offerUrl}>{title}</Link>
+          <Link to={offerUrl} onClick={() => handleFetchOffer(id)}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{capitalize(type)}</p>
       </div>

@@ -9,3 +9,5 @@ export type Review = {
   comment: string;
   rating: number;
 };
+
+export type Reviews = Review[];
