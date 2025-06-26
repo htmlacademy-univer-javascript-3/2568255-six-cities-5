@@ -31,4 +31,4 @@ export type OfferDetailed = {
   };
   images: string[];
   maxAdults: number;
-}
+};

@@ -1,10 +1,14 @@
-import {OfferCardList} from '../../components/offer-card-list/offer-card-list.tsx';
-import {Offer} from '../../models/offer.ts';
+import { OfferCardList } from '../../components/offer-card-list/offer-card-list.tsx';
+import { Offer } from '../../models/offer.ts';
+import Map from '../../components/map/map.tsx';
+import { useState } from 'react';
 type MainScreenProps = {
   offers: Offer[];
 };
 
 export function MainScreen({ offers }: MainScreenProps) {
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -77,11 +81,24 @@ export function MainScreen({ offers }: MainScreenProps) {
                 </li>
               </ul>
             </form>
-            <OfferCardList offers={offers} />
+            <OfferCardList
+              offers={offers}
+              setActiveOfferId={setActiveOfferId}
+            />
           </section>
 
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map map">
+              <Map
+                city={{
+                  latitude: 52.377956,
+                  longitude: 4.89707,
+                  zoom: 12,
+                }}
+                offers={offers}
+                activeOfferId={activeOfferId}
+              />
+            </section>
           </div>
         </div>
       </div>
