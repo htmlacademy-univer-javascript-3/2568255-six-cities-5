@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Offer } from '../../models/offer.ts';
-import { OfferCard } from '../offer-card/offer-card.tsx';
+import { OfferCard } from '../offer/offer-card.tsx';
 import { AppRoute, CardType } from '../../const.ts';
 import { Link } from 'react-router-dom';
 

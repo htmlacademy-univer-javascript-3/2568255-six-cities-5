@@ -1,4 +1,4 @@
-import { OfferCardList } from '../../components/offer-card-list/offer-card-list.tsx';
+import { OfferCardList } from '../../components/offer/offer-card-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { useState } from 'react';
 import {CardType, MapType} from '../../const.ts';

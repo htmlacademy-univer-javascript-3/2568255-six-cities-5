@@ -1,5 +1,6 @@
-import { SortingType } from './const.ts';
-import { Offer } from './models/offer.ts';
+import {SortingType} from './const.ts';
+import {Offer} from './models/offer.ts';
+
 
 export const capitalize = (str: string): string => {
   if (!str) {
@@ -18,7 +19,7 @@ export const getSorter = (sortingType: SortingType) => {
       return (a: Offer, b: Offer) => b.price - a.price;
     case SortingType.TopRatedFirst:
       return (a: Offer, b: Offer) => b.rating - a.rating;
-      default:
+    default:
       return () => 0;
   }
 };
