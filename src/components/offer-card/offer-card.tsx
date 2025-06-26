@@ -24,16 +24,14 @@ export function OfferCard({
   return (
     <article
       className={cn('place-card', {
-        cities__card: cardType === CardType.Main,
-        favorites__card: cardType === CardType.Favorite,
+        'cities__card': cardType === CardType.Main,
+        'favorites__card': cardType === CardType.Favorite,
         'near-places__card': cardType === CardType.Main,
       })}
       onMouseEnter={() =>
-        onChangeActiveOfferId ? onChangeActiveOfferId(id) : null
-      }
+        onChangeActiveOfferId ? onChangeActiveOfferId(id) : null}
       onMouseLeave={() =>
-        onChangeActiveOfferId ? onChangeActiveOfferId(null) : null
-      }
+        onChangeActiveOfferId ? onChangeActiveOfferId(null) : null}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -91,7 +89,9 @@ export function OfferCard({
           <div className="place-card__stars rating__stars">
             <span
               style={{ width: `${(Math.round(rating) / 5) * 100}%` }}
-            ></span>
+            >
+
+            </span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

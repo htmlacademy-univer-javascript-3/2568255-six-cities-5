@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useRef } from 'react';
-import useMap from './use-map.ts';
+import useMap from '../../hooks/use-map.ts';
 import leaflet from 'leaflet';
 import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../const.ts';
 import { Offer } from '../../models/offer.ts';
@@ -53,7 +53,7 @@ export default function Map({
           .addTo(map);
       });
     }
-  }, [map, offers, activeOfferId]);
+  }, [map, offers, activeOfferId, activeCustomIcon, defaultCustomIcon]);
 
   return <div style={{ height: '100%', width: '100%' }} ref={mapRef}></div>;
 }

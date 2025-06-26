@@ -1,12 +1,12 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const.ts';
 import { FavoriteList } from '../../components/favorite-list/favorite-list.tsx';
-import {Offer} from '../../models/offer.ts';
-type FavoritesScreenProps = {
+import { Offer } from '../../models/offer.ts';
+type FavoritesPageProps = {
   offers: Offer[];
 };
 
-export function FavoritesScreen({ offers }: FavoritesScreenProps) {
+export function FavoritesPage({ offers }: FavoritesPageProps) {
   const favorites: Offer[] = offers.filter((offer) => offer.isFavorite);
   const favoritesDictionary: { [key: string]: Offer[] } = {};
   for (const offer of favorites) {
