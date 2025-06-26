@@ -1,28 +1,21 @@
-import { ReactElement } from 'react';
-import { Navigate } from 'react-router-dom';
+import {ReactElement} from 'react';
+import {Navigate} from 'react-router-dom';
 
-import {
-  AppRoute,
-  AuthorizationStatus,
-  CardType,
-  MapType,
-} from '../../const.ts';
-import { useAppSelector } from '../../hooks/use-app-selector.ts';
-import { useAppDispatch } from '../../hooks/use-app-dispatch.ts';
-import { postReviewAction } from '../../store/api-actions.ts';
-import { getAuthStatus } from '../../store/user/selectors.ts';
-import {
-  getOfferDetails,
-  getDetailsLoadingStatus,
-} from '../../store/offer-details/selectors.ts';
+import {AppRoute, AuthorizationStatus, CardType, MapType} from '../../const.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {postReviewAction} from '../../store/api-actions.ts';
+import {getAuthStatus} from '../../store/user/selectors.ts';
+import {getOfferDetails, getDetailsLoadingStatus} from '../../store/offer-details/selectors.ts';
 
 import Header from '../../components/header/header.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
-import OfferCardsList from '../../components/offer/offer-cards-list.tsx';
+import OfferCardsList from '../../components/offer/offer-card-list.tsx';
 import OfferDetails from '../../components/offer/offer-details.tsx';
 import ReviewForm from '../../components/review/review-form.tsx';
-import ReviewsList from '../../components/review/reviews-list.tsx';
+import ReviewsList from '../../components/review/review-list.tsx';
 import Map from '../../components/map/map.tsx';
+
 
 function OfferPage(): ReactElement {
   const offerDetails = useAppSelector(getOfferDetails);
@@ -31,11 +24,15 @@ function OfferPage(): ReactElement {
   const dispatch = useAppDispatch();
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <Spinner />
+    );
   }
 
   if (offerDetails === undefined) {
-    return <Navigate to={AppRoute.NotFound} />;
+    return (
+      <Navigate to={AppRoute.NotFound} />
+    );
   }
 
   const offer = offerDetails.offer;
@@ -51,11 +48,8 @@ function OfferPage(): ReactElement {
     location: nearbyOffer.location,
   }));
 
-  const handlePostReview = (reviewData: {
-    comment: string;
-    rating: number;
-  }) => {
-    dispatch(postReviewAction({ offerId: offer.id, ...reviewData }));
+  const handlePostReview = (reviewData: { comment: string; rating: number }) => {
+    dispatch(postReviewAction({offerId: offer.id, ...reviewData}));
   };
 
   return (
@@ -65,29 +59,26 @@ function OfferPage(): ReactElement {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {offer.images.slice(0, 6).map((image) => (
-                <div key={image} className="offer__image-wrapper">
-                  <img
-                    className="offer__image"
-                    src={image}
-                    alt="Photo studio"
-                  />
-                </div>
-              ))}
+              {offer.images.slice(0, 6).map((image) =>
+                (
+                  <div key={image} className="offer__image-wrapper">
+                    <img className="offer__image" src={image} alt="Photo studio"/>
+                  </div>
+                ))}
             </div>
           </div>
 
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <OfferDetails {...offer} />
+              <OfferDetails
+                {...offer}
+              />
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews &middot;
-                  <span className="reviews__amount">{reviews.length}</span>
+                  Reviews &middot;<span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                {authStatus === AuthorizationStatus.Authorized && (
-                  <ReviewForm submitHandler={handlePostReview} />
-                )}
+                <ReviewsList reviews={reviews.slice(0, 10)}/>
+                { authStatus === AuthorizationStatus.Authorized && <ReviewForm submitHandler={handlePostReview}/> }
               </section>
             </div>
           </div>
@@ -104,10 +95,11 @@ function OfferPage(): ReactElement {
 
         <div className="container">
           <section className="near-places places">
-            <h2 className="near-places__title">
-              Other places in the neighbourhood
-            </h2>
-            <OfferCardsList offers={nearbyOffers} cardType={CardType.Nearby} />
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <OfferCardsList
+              offers={nearbyOffers}
+              cardType={CardType.Nearby}
+            />
           </section>
         </div>
       </main>

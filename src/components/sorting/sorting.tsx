@@ -3,6 +3,8 @@ import { useAppSelector } from '../../hooks/use-app-selector.ts';
 import { useAppDispatch } from '../../hooks/use-app-dispatch.ts';
 import { getActiveSortingType } from '../../store/offers-list/selectors.ts';
 import { setActiveSortingType } from '../../store/offers-list/reducers.ts';
+import { ReactElement, useState } from 'react';
+import cn from 'classnames';
 
 function Sorting(): ReactElement {
   const [isOpen, setIsOpen] = useState(false);

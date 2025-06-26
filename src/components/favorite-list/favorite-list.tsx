@@ -12,11 +12,26 @@ type FavoriteListProps = {
   offers: Offer[];
 }
 
+
 function FavoriteList({city, offers}: FavoriteListProps): ReactElement {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
-@@ -33,3 +35,6 @@ export function FavoriteList({city, offers}: FavoriteListProps): ReactElement {
+        <div className="locations__item">
+          <Link className="locations__item-link" to={AppRoute.Main}>
+            <span>{city}</span>
+          </Link>
+        </div>
+      </div>
+      <div className="favorites__places">
+        {offers.map((offer) => (
+          <OfferCard
+            key={offer.id}
+            {...offer}
+            cardType={CardType.Favorite}
+          />
+        ))}
+      </div>
     </li>
   );
 }

@@ -1,13 +1,17 @@
-﻿import { FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {FormEvent, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
-import { AppRoute, CITIES } from '../../const.ts';
-import { useAppDispatch } from '../../hooks/use-app-dispatch.ts';
-import { fetchOffersAction, loginAction } from '../../store/api-actions.ts';
-import { setActiveCity } from '../../store/offers-list/reducers.ts';
+import {AppRoute, CITIES} from '../../const.ts';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {fetchFavoriteOffersAction, fetchOffersAction, loginAction} from '../../store/api-actions.ts';
+import {setActiveCity} from '../../store/offers-list/reducers.ts';
+
 
 const isPasswordValid = (password: string): boolean =>
-  /\d/.test(password) && /[a-zA-Z]/.test(password) && !/\s/.test(password);
+  /\d/.test(password) &&
+  /[a-zA-Z]/.test(password) &&
+  !/\s/.test(password);
+
 
 function LoginPage() {
   const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)];
@@ -20,14 +24,17 @@ function LoginPage() {
     evt.preventDefault();
 
     if (email !== '' && isPasswordValid(password)) {
-      dispatch(loginAction({ email: email, password: password })).then(() => {
+      dispatch(loginAction({email: email, password: password})).then(() => {
         dispatch(fetchOffersAction());
+        dispatch(fetchFavoriteOffersAction());
         navigate(AppRoute.Main);
       });
     }
   };
 
-  const handleCityClick = () => {};
+  const handleCityClick = () => {
+    dispatch(setActiveCity(randomCity));
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -36,13 +43,7 @@ function LoginPage() {
           <div className="header__wrapper">
             <div className="header__left">
               <Link className="header__logo-link" to={AppRoute.Main}>
-                <img
-                  className="header__logo"
-                  src="/img/logo.svg"
-                  alt="6 cities logo"
-                  width="81"
-                  height="41"
-                />
+                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
           </div>
@@ -58,8 +59,7 @@ function LoginPage() {
                 <label className="visually-hidden">E-mail</label>
                 <input
                   className="login__input form__input"
-                  type="email"
-                  name="email"
+                  type="email" name="email"
                   placeholder="Email"
                   onChange={(evt) => setEmail(evt.target.value)}
                   required
@@ -76,21 +76,12 @@ function LoginPage() {
                   required
                 />
               </div>
-              <button
-                className="login__submit form__submit button"
-                type="submit"
-              >
-                Sign in
-              </button>
+              <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link
-                className="locations__item-link"
-                to={AppRoute.Main}
-                onClick={handleCityClick}
-              >
+              <Link className="locations__item-link" to={AppRoute.Main} onClick={handleCityClick}>
                 <span>{randomCity.name}</span>
               </Link>
             </div>
